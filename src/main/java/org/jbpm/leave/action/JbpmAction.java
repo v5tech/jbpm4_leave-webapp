@@ -80,9 +80,8 @@ public class JbpmAction extends ActionSupport {
 		this.userName = userName;
 	}
 
-	@SuppressWarnings("unchecked")
 	public String login() {
-		Map map = ActionContext.getContext().getSession();
+		Map<String, Object> map = ActionContext.getContext().getSession();
 		map.put("user", userName);
 		return SUCCESS;
 	}
@@ -157,10 +156,9 @@ public class JbpmAction extends ActionSupport {
 	 * 
 	 * @return
 	 */
-	@SuppressWarnings("unchecked")
 	public String start() {
 		init();
-		Map map = new HashMap();
+		Map<String, String> map = new HashMap<String, String>();
 		// 在启动任务时，等于就是一个用户要请假了，那么，此时，要把流程信息关联到此用户上，在开始的下一个节点（也就是第一个任务节点），是指派给。所以用户名要与其对应的变量关联起来
 		map.put("owner", getLoginedUserName());
 		System.out.println("id_: " + id);
@@ -294,10 +292,9 @@ public class JbpmAction extends ActionSupport {
 	 * 
 	 * @return
 	 */
-	@SuppressWarnings("unchecked")
 	public String submit() {
 		init();
-		Map map = new HashMap();
+		Map<String, String> map = new HashMap<String, String>();
 		// 此day,
 		// 在xml文件中，有一个decision标签，里面有一个表达式:expr="#{day > 3 ? '老板审批' : '结束'}"
 		// 即它与表达式中的day关联

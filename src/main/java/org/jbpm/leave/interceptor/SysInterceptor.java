@@ -16,7 +16,6 @@ public class SysInterceptor extends MethodFilterInterceptor {
 	public void init() {
 	}
 
-	@SuppressWarnings("unchecked")
 	@Override
 	public String doIntercept(ActionInvocation invoke) throws Exception {
 		if (null == ActionContext.getContext().getSession().get("user")) {
