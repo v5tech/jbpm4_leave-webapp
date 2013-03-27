@@ -12,6 +12,24 @@
 
 	<dependencies>
 		<dependency>
+			<groupId>javax.servlet</groupId>
+			<artifactId>jstl</artifactId>
+			<version>1.2</version>
+		</dependency>
+
+		<dependency>
+			<groupId>javax.servlet</groupId>
+			<artifactId>servlet-api</artifactId>
+			<version>2.5</version>
+			<scope>provided</scope>
+		</dependency>
+		<dependency>
+			<groupId>javax.servlet.jsp</groupId>
+			<artifactId>jsp-api</artifactId>
+			<version>2.1</version>
+			<scope>provided</scope>
+		</dependency>
+		<dependency>
 			<groupId>org.apache.struts</groupId>
 			<artifactId>struts2-core</artifactId>
 			<version>2.2.1</version>
@@ -90,22 +108,23 @@
 		<dependency>
 			<groupId>org.mybatis</groupId>
 			<artifactId>mybatis</artifactId>
-			<version>3.0.3</version>
+			<version>3.1.1</version>
 		</dependency>
+
 		<dependency>
 			<groupId>org.mybatis</groupId>
 			<artifactId>mybatis-spring</artifactId>
-			<version>1.0.0-RC3</version>
+			<version>1.1.1</version>
 		</dependency>
 		<dependency>
 			<groupId>org.jbpm.jbpm4</groupId>
 			<artifactId>jbpm-api</artifactId>
-			<version>4.3</version>
+			<version>4.4</version>
 		</dependency>
 		<dependency>
 			<groupId>org.jbpm.jbpm4</groupId>
 			<artifactId>jbpm-jpdl</artifactId>
-			<version>4.3</version>
+			<version>4.4</version>
 		</dependency>
 		<dependency>
 			<groupId>xerces</groupId>
@@ -115,7 +134,7 @@
 		<dependency>
 			<groupId>org.jbpm.jbpm4</groupId>
 			<artifactId>jbpm-pvm</artifactId>
-			<version>4.3</version>
+			<version>4.4</version>
 			<exclusions>
 				<exclusion>
 					<groupId>juel</groupId>
@@ -134,37 +153,15 @@
 		<dependency>
 			<groupId>org.jbpm.jbpm4</groupId>
 			<artifactId>jbpm-log</artifactId>
-			<version>4.3</version>
+			<version>4.4</version>
 		</dependency>
 		<dependency>
 			<groupId>org.jbpm.jbpm4</groupId>
 			<artifactId>jbpm-db</artifactId>
-			<version>4.0</version>
-		</dependency>
-		<!--运行例子所需包 -->
-		<dependency>
-			<groupId>org.subethamail</groupId>
-			<artifactId>subethasmtp</artifactId>
-			<version>3.1.4</version>
-		</dependency>
-		<dependency>
-			<groupId>org.subethamail</groupId>
-			<artifactId>subethasmtp-wiser</artifactId>
-			<version>1.2</version>
-		</dependency>
-		<dependency>
-			<groupId>hsqldb</groupId>
-			<artifactId>hsqldb</artifactId>
-			<version>1.8.0.10</version>
-		</dependency>
-		<dependency>
-			<groupId>junit</groupId>
-			<artifactId>junit</artifactId>
-			<version>4.8.2</version>
-			<scope>provided</scope>
+			<version>4.4</version>
 		</dependency>
 	</dependencies>
-	
+
 	<build>
 		<finalName>jbpm_4_leave_webapp</finalName>
 		<pluginManagement>

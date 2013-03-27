@@ -20,10 +20,10 @@ import org.jbpm.api.RepositoryService;
 import org.jbpm.api.TaskService;
 import org.jbpm.api.model.ActivityCoordinates;
 import org.jbpm.api.task.Task;
+import org.jbpm.leave.vo.ProcessVo;
 
 import com.opensymphony.xwork2.ActionContext;
 import com.opensymphony.xwork2.ActionSupport;
-import com.zwl.vo.ProcessVo;
 
 public class JbpmAction extends ActionSupport
 {
@@ -103,7 +103,7 @@ public class JbpmAction extends ActionSupport
     }
     
     /**
-     * ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ò³
+     * ¼ÓÔØÊ×Ò³
      * @return
      */
     public String loadIndexPage()
@@ -113,24 +113,24 @@ public class JbpmAction extends ActionSupport
         processInstanceList=executionService.createProcessInstanceQuery().list();
         
         
-        //ï¿½ï¿½ï¿½ï¿½Ä£ï¿½â²»Í¬ï¿½Ä½ï¿½É«ï¿½ï¿½Â½ÏµÍ³ï¿½ï¿½ï¿½ï¿½Óµï¿½ï¿½ï¿½Í¬ï¿½Ä´ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
+        //ÕâÀïÄ£Äâ²»Í¬µÄ½ÇÉ«µÇÂ½ÏµÍ³£¬»á½Óµ½²»Í¬µÄ´ý°ìÈÎÎñ
         String manager="zwllxs1,zwllxs2,zwllxs3,zwllxs4";
         String boss="zhangweilin,zhangweilin2,zhangweilin3,zhangweilin4";
-        String roleName="";//Òªï¿½ï¿½ï¿½ï¿½ï¿½ï¿½È¥ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ÚµÄ½Úµï¿½
+        String roleName="";//Òª°´´ËÃûÈ¥²éÕÒËüËùÔÚµÄ½Úµã
         
         String name=getLoginedUserName();
         
-        //ï¿½ï¿½ï¿½ï¿½ï¿½Â½
+        //¾­ÀíµÇÂ½
         if(manager.contains(name))
         {
             roleName="manager";
         }
-        //ï¿½Ï°ï¿½ï¿½Â½
+        //ÀÏ°åµÇÂ½
         else if(boss.contains(name))
         {
             roleName="boss";
         }
-        //ï¿½ï¿½Í¨ï¿½Ã»ï¿½
+        //ÆÕÍ¨ÓÃ»§
         else
         {
             roleName=name;
@@ -143,21 +143,21 @@ public class JbpmAction extends ActionSupport
     }
     
     /**
-     * ï¿½ï¿½ï¿½ï¿½
+     * ²¿Êð
      * @return
      */
     public String deploy()
     {
-        System.out.println("ï¿½ï¿½ï¿½ï¿½");
+        System.out.println("²¿Êð");
         init();
 //        String did=repositoryService.createDeployment().addResourceFromClasspath("leave2.jpdl.xml").deploy();
         ZipInputStream zis = new ZipInputStream(this.getClass().getResourceAsStream("/leave2.zip"));
-        //ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ì£ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ô¤ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ñ£¬¼ï¿½ï¿½ï¿½ÏµÍ³ï¿½Ð´ï¿½ï¿½ï¿½Ò»ï¿½ï¿½ï¿½ï¿½ï¿½Ì£ï¿½ï¿½ï¿½ï¿½ï¿½È«ï¿½ÖµÄ£ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Äµï¿½Â½ ï¿½Ã»ï¿½ï¿½Þ¹Ø¡ï¿½È»ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ê±ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Â½ï¿½Ã»ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
+        //·¢ÆðÁ÷³Ì£¬½ö½ö¾ÍÊÇÔ¤¶¨ÒåÈÎÎñ£¬¼´ÔÚÏµÍ³ÖÐ´´½¨Ò»¸öÁ÷³Ì£¬ÕâÊÇÈ«¾ÖµÄ£¬Óë¾ßÌåµÄµÇÂ½ ÓÃ»§ÎÞ¹Ø¡£È»ºó£¬ÔÚÆô¶¯Á÷³ÌÊ±£¬²ÅÓëµÇÂ½ÓÃ»§¹ØÁªÆðÀ´
         String did=repositoryService.createDeployment().addResourcesFromZipInputStream(zis).deploy();
         
-        //Ê¹ï¿½ï¿½zipï¿½ï¿½Ê½
+        //Ê¹ÓÃzip·½Ê½
 //        ZipInputStream zis = new ZipInputStream(this.getClass().getResourceAsStream("/leave2.zip"));
-//        //ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ì£ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ô¤ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ñ£¬¼ï¿½ï¿½ï¿½ÏµÍ³ï¿½Ð´ï¿½ï¿½ï¿½Ò»ï¿½ï¿½ï¿½ï¿½ï¿½Ì£ï¿½ï¿½ï¿½ï¿½ï¿½È«ï¿½ÖµÄ£ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Äµï¿½Â½ ï¿½Ã»ï¿½ï¿½Þ¹Ø¡ï¿½È»ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ê±ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Â½ï¿½Ã»ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
+//        //·¢ÆðÁ÷³Ì£¬½ö½ö¾ÍÊÇÔ¤¶¨ÒåÈÎÎñ£¬¼´ÔÚÏµÍ³ÖÐ´´½¨Ò»¸öÁ÷³Ì£¬ÕâÊÇÈ«¾ÖµÄ£¬Óë¾ßÌåµÄµÇÂ½ ÓÃ»§ÎÞ¹Ø¡£È»ºó£¬ÔÚÆô¶¯Á÷³ÌÊ±£¬²ÅÓëµÇÂ½ÓÃ»§¹ØÁªÆðÀ´
 //        String did=repositoryService.createDeployment().addResourcesFromZipInputStream(zis).deploy();
     
         System.out.println("did: "+did);
@@ -165,7 +165,7 @@ public class JbpmAction extends ActionSupport
     }
     
     /**
-     * ï¿½ï¿½ï¿½ï¿½
+     * Æô¶¯
      * @return
      */
     @SuppressWarnings("unchecked")
@@ -173,11 +173,11 @@ public class JbpmAction extends ActionSupport
     {
         init();
         Map map = new HashMap();
-        //ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ê±ï¿½ï¿½ï¿½ï¿½ï¿½Ú¾ï¿½ï¿½ï¿½Ò»ï¿½ï¿½ï¿½Ã»ï¿½Òªï¿½ï¿½ï¿½ï¿½Ë£ï¿½ï¿½ï¿½Ã´ï¿½ï¿½ï¿½ï¿½Ê±ï¿½ï¿½Òªï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ï¢ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ã»ï¿½ï¿½Ï£ï¿½ï¿½Ú¿ï¿½Ê¼ï¿½ï¿½ï¿½ï¿½Ò»ï¿½ï¿½ï¿½Úµã£¨Ò²ï¿½ï¿½ï¿½Çµï¿½Ò»ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Úµã£©ï¿½ï¿½ï¿½ï¿½Ö¸ï¿½É¸ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ã»ï¿½ï¿½ï¿½Òªï¿½ï¿½ï¿½ï¿½ï¿½Ó¦ï¿½Ä±ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
+        //ÔÚÆô¶¯ÈÎÎñÊ±£¬µÈÓÚ¾ÍÊÇÒ»¸öÓÃ»§ÒªÇë¼ÙÁË£¬ÄÇÃ´£¬´ËÊ±£¬Òª°ÑÁ÷³ÌÐÅÏ¢¹ØÁªµ½´ËÓÃ»§ÉÏ£¬ÔÚ¿ªÊ¼µÄÏÂÒ»¸ö½Úµã£¨Ò²¾ÍÊÇµÚÒ»¸öÈÎÎñ½Úµã£©£¬ÊÇÖ¸ÅÉ¸ø¡£ËùÒÔÓÃ»§ÃûÒªÓëÆä¶ÔÓ¦µÄ±äÁ¿¹ØÁªÆðÀ´
         map.put("owner", getLoginedUserName());
         System.out.println("id_: "+id);
         ProcessInstance processInstance=executionService.startProcessInstanceById(id, map);
-        System.out.println("ï¿½ï¿½ï¿½ï¿½Ê±processInstance: "+processInstance.getId());
+        System.out.println("Æô¶¯Ê±processInstance: "+processInstance.getId());
         return SUCCESS;  
     }
     
@@ -203,7 +203,7 @@ public class JbpmAction extends ActionSupport
     }
     
     /**
-     * ï¿½Ï°ï¿½ï¿½ï¿½ï¿½ï¿½
+     * ÀÏ°åÀ´ÁË
      * @return
      */
     public String boss()
@@ -224,7 +224,7 @@ public class JbpmAction extends ActionSupport
     }
     
     /**
-     * ï¿½Ï°å´¦ï¿½ï¿½
+     * ÀÏ°å´¦Àí
      * @return
      */
     public String submitBoss()
@@ -235,7 +235,7 @@ public class JbpmAction extends ActionSupport
     }
     
     /**
-     * ï¿½ï¿½ï¿½ï¿½ï¿½á½» 
+     * ¾­ÀíÌá½» 
      * @return
      */
     public String submitManager()
@@ -246,7 +246,7 @@ public class JbpmAction extends ActionSupport
     }
     
     /**
-     * ï¿½Æ³ï¿½
+     * ÒÆ³ý
      * @return
      */
     public String remove()
@@ -257,23 +257,23 @@ public class JbpmAction extends ActionSupport
     }
     
     /**
-     * ï¿½ï¿½Ê¾
+     * ÏÔÊ¾
      * @return
      */
     public String view()
     {
         init();
-      //Í¨ï¿½ï¿½idï¿½éµ½ï¿½ï¿½ï¿½ï¿½Êµï¿½ï¿½
+      //Í¨¹ýid²éµ½Á÷³ÌÊµÀý
         ProcessInstance processInstance = executionService.findProcessInstanceById(id);
         Set<String> activityNames = processInstance.findActiveActivityNames();
         
-        //CoordinatesÎªï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
+        //CoordinatesÎªÏàÒÀÒÂÎï
         ac = repositoryService.getActivityCoordinates(processInstance.getProcessDefinitionId(),activityNames.iterator().next());
         return SUCCESS;
     }
     
     /**
-     * ï¿½ï¿½Ê¾Í¼Æ¬
+     * ÏÔÊ¾Í¼Æ¬
      * @throws IOException
      */
     public void pic() throws IOException
@@ -283,7 +283,7 @@ public class JbpmAction extends ActionSupport
         String processDefinitionId = processInstance.getProcessDefinitionId();
         ProcessDefinition processDefinition = repositoryService.createProcessDefinitionQuery().processDefinitionId(processDefinitionId).uniqueResult();
         String filePath="leave2.png";
-        //ï¿½Ë´ï¿½ï¿½ï¿½Öªï¿½ï¿½ÎªÊ²Ã´ï¿½ï¿½Òªï¿½Ø±ï¿½ï¿½Í¨ï¿½ï¿½repositoryServiceï¿½ï¿½processDefinition.getDeploymentId()ï¿½ï¿½ï¿½ï¿½Ê¾ï¿½ï¿½Í¼Æ¬
+        //´Ë´¦²»ÖªµÀÎªÊ²Ã´»¹ÒªÌØ±ðµÄÍ¨¹ýrepositoryServiceºÍprocessDefinition.getDeploymentId()À´ÏÔÊ¾´ËÍ¼Æ¬
         InputStream inputStream = repositoryService.getResourceAsStream(processDefinition.getDeploymentId(),filePath);
         byte[] b = new byte[1024];
         int len = -1; 
@@ -297,7 +297,7 @@ public class JbpmAction extends ActionSupport
     
     
     /**
-     * ï¿½á½»
+     * Ìá½»
      * @return
      */
     @SuppressWarnings("unchecked")
@@ -305,19 +305,19 @@ public class JbpmAction extends ActionSupport
     {
         init();
         Map map = new HashMap();
-        //ï¿½ï¿½day, ï¿½ï¿½xmlï¿½Ä¼ï¿½ï¿½Ð£ï¿½ï¿½ï¿½Ò»ï¿½ï¿½decisionï¿½ï¿½Ç©ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ò»ï¿½ï¿½ï¿½ï¿½ï¿½Ê½:expr="#{day > 3 ? 'ï¿½Ï°ï¿½ï¿½ï¿½ï¿½ï¿½' : 'ï¿½ï¿½ï¿½ï¿½'}" 
-        //ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ê½ï¿½Ðµï¿½dayï¿½ï¿½ï¿½ï¿½
+        //´Ëday, ÔÚxmlÎÄ¼þÖÐ£¬ÓÐÒ»¸ödecision±êÇ©£¬ÀïÃæÓÐÒ»¸ö±í´ïÊ½:expr="#{day > 3 ? 'ÀÏ°åÉóÅú' : '½áÊø'}" 
+        //¼´ËüÓë±í´ïÊ½ÖÐµÄday¹ØÁª
         map.put("day", processVo.getDay());
         map.put("reason", processVo.getReason());
         map.put("name", processVo.getOwner());
         map.put("age", processVo.getAge());
         map.put("sex", processVo.getSex());
-        //ï¿½ï¿½ï¿½Ú¶ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Îªï¿½Ö·ï¿½ï¿½ï¿½ï¿½ï¿½Ö¸ï¿½ï¿½Òªï¿½ï¿½ï¿½Ä¸ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½É£ï¿½ï¿½ï¿½ï¿½ï¿½Ö¸ï¿½ï¿½Òªï¿½ï¿½testhahaï¿½ï¿½ï¿½,ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ö¸ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ö£ï¿½
-        //ï¿½ï¿½Ö»ï¿½Ü°ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½È¥Ö¸ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½,ï¿½ï¿½ï¿½Ã»ï¿½ï¿½ï¿½ï¿½ï¿½Ö£ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½map,
-        //Ò²ï¿½ï¿½ï¿½ï¿½Ëµï¿½ï¿½ï¿½ï¿½ï¿½ÝµÄ²ï¿½ï¿½ï¿½Îªmap,ï¿½ï¿½ï¿½ï¿½ï¿½Ì»ï¿½È¥Ñ°ï¿½ï¿½Ã»ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Æµï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ß£ï¿½ï¿½ï¿½ï¿½Ã»ï¿½Òµï¿½ï¿½ï¿½ï¿½ï¿½ï¿½×³ï¿½No unnamed transitions were found for the task ï¿½ì³£
+        //Èç¹ûµÚ¶þ¸ö²ÎÊýÎª×Ö·û´®£¬ÔòÊÇÖ¸¶¨ÒªÏòÄÄ¸ö·½ÏòÍê³É£¬´ËÊÇÖ¸¶¨ÒªÏòtesthahaÍê³É,²¢ÇÒÈç¹ûÏßÌõÉÏÖ¸¶¨ÁËÎÄ×Ö£¬
+        //¾ÍÖ»ÄÜ°´×ÅÎÄ×ÖÈ¥Ö¸¶¨·½Ïò,Èç¹ûÃ»ÓÐÎÄ×Ö£¬²ÅÄÜÓÃmap,
+        //Ò²¾ÍÊÇËµ£¬Èç¹û´«µÝµÄ²ÎÊýÎªmap,ÔòÁ÷³Ì»áÈ¥Ñ°ÕÒÃ»¶¨ÒåÃû³ÆµÄÏßÌõ×ß£¬Èç¹ûÃ»ÕÒµ½¡£¾ÍÅ×³öNo unnamed transitions were found for the task Òì³£
         //taskService.completeTask(taskId, "testhaha");
-        //ï¿½ï¿½ï¿½Ú¶ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Îªmap,ï¿½ï¿½ï¿½Ê¾Ö»ï¿½Ç´ï¿½ï¿½Ý²ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
-        System.out.println("ï¿½á½»ï¿½ï¿½ï¿½");
+        //Èç¹ûµÚ¶þ¸ö²ÎÊýÎªmap,Ôò±íÊ¾Ö»ÊÇ´«µÝ²ÎÊý¶øÒÑ
+        System.out.println("Ìá½»Íê±Ï");
         taskService.completeTask(processVo.getTaskId(), map);
         return SUCCESS;
     }
