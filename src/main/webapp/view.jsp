@@ -8,7 +8,6 @@
 </head>
 <body>
 <!-- <img src="pic.jsp?id=${id }" style="position:absolute;left:0px;top:0px;"> -->
-<!--  -->
 <img src="pic.html?id=${id }" style="position:absolute;left:0px;top:0px;">
 <div style="position:absolute;border:2px solid red;left:${ac.x }px;top:${ac.y }px;width:${ac.width }px;height:${ac.height}px;"></div>
 </body>

@@ -6,7 +6,7 @@
     <!-- 指定Web应用的默认编码集,相当于调用HttpServletRequest的setCharacterEncoding方法 -->
     <constant name="struts.i18n.encoding" value="UTF-8"/>
     <!-- 该属性指定需要Struts 2处理的请求后缀，该属性的默认值是action，即所有匹配*.action的请求都由Struts2处理。
-    如果用户需要指定多个请求后缀，则多个后缀之间以英文逗号（,）隔开。 -->
+        如果用户需要指定多个请求后缀，则多个后缀之间以英文逗号（,）隔开。 -->
     <constant name="struts.action.extension" value="html"/>
     <!-- 设置浏览器是否缓存静态内容,默认值为true(生产环境下使用),开发阶段最好关闭 -->
     <constant name="struts.serve.static.browserCache" value="false"/>

@@ -6,30 +6,23 @@ import com.opensymphony.xwork2.ActionInvocation;
 import com.opensymphony.xwork2.interceptor.MethodFilterInterceptor;
 
 @SuppressWarnings("serial")
-public class SysInterceptor extends MethodFilterInterceptor
-{
-    @Override
-    public void destroy()
-    {
+public class SysInterceptor extends MethodFilterInterceptor {
+	@Override
+	public void destroy() {
 
-    }
+	}
 
-    @Override
-    public void init()
-    {
-    }
+	@Override
+	public void init() {
+	}
 
-    @SuppressWarnings("unchecked")
-    @Override
-    public String doIntercept(ActionInvocation invoke) throws Exception
-    {
-        if (null == ActionContext.getContext().getSession().get("user"))
-        {
-            return Action.LOGIN;
-        }
-        else
-        {
-            return invoke.invoke();
-        }
-    }
+	@SuppressWarnings("unchecked")
+	@Override
+	public String doIntercept(ActionInvocation invoke) throws Exception {
+		if (null == ActionContext.getContext().getSession().get("user")) {
+			return Action.LOGIN;
+		} else {
+			return invoke.invoke();
+		}
+	}
 }
