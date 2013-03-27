@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<process id="leave" name="leave" xmlns="http://jbpm.org/4.4/jpdl">
+	<start g="201,14,48,48" name="开始">
+		<transition g="-42,-10" name="请假" to="填写请假单" />
+	</start>
+	<task assignee="zzg" g="178,87,92,52" name="填写请假单">
+		<transition g="-97,2" name="判断是不是经理" to="是不是经理" />
+	</task>
+	<decision expr="#{manager}" g="204,158,48,48" name="是不是经理">
+		<transition g="-23,-11" name="否" to="经理审核" />
+		<transition g="14,-11" name="是" to="老板审批" />
+	</decision> 
+	<task assignee="Lingo" g="103,252,92,52" name="经理审核">
+		<transition g="150,450:10,-21" name="经理批准" to="结束" />
+		<transition g="-22,-22" name="请假天数>3" to="老板审批" />
+		<transition g="-61,-1" name="经理不批准" to="终止" />
+		<transition g="149,114:-55,82" name="经理驳回" to="填写请假单" />
+	</task>
+	<task assignee="ForgetDavi" g="278,251,92,52" name="老板审批">
+		<transition g="326,450:-58,-24" name="老板批准" to="结束" />
+		<transition g="7,0" name="老板不批准" to="终止" />
+		<transition g="323,114:13,61" name="老板驳回" to="填写请假单" />
+	</task>
+	<end g="219,429,48,48" name="结束" state="confirm" />
+	<end g="220,360,48,48" name="终止" state="dissent" />
+</process>  

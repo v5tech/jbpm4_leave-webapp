@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:aop="http://www.springframework.org/schema/aop"
+	xmlns:tx="http://www.springframework.org/schema/tx"
+	xsi:schemaLocation="
+    http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-2.0.xsd
+    http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx-2.0.xsd
+    http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop-2.0.xsd">
+
+	<!--jbpm4.4工作流  -->
+	<bean id="springHelper" class="org.jbpm.pvm.internal.processengine.SpringHelper">
+		<property name="jbpmCfg" value="spring-jbpm4.cfg.xml" />
+	</bean>
+  	<bean id="processEngine" factory-bean="springHelper" factory-method="createProcessEngine" />
+  	  
+	<bean id="dataSource" class="org.apache.commons.dbcp.BasicDataSource">
+		<property name="driverClassName" value="com.mysql.jdbc.Driver" />
+		<property name="url" value="jdbc:mysql://localhost:3306/jbpm4_4" />
+		<property name="username" value="root" />
+		<property name="password" value="" />
+	</bean>  
+	<bean id="sessionFactory"
+		class="org.springframework.orm.hibernate3.LocalSessionFactoryBean">
+		<property name="dataSource" ref="dataSource" />
+		<property name="hibernateProperties">
+			<props>
+				<prop key="hibernate.dialect">
+					org.hibernate.dialect.MySQLInnoDBDialect
+				</prop>
+				<prop key="hibernate.default_batch_fetch_size">10</prop>
+				<prop key="hibernate.max_fetch_depth">0</prop>
+				<prop key="hibernate.show_sql">true</prop>
+				<prop key="hibernate.hbm2ddl.auto">update</prop>
+			</props>
+		</property>
+		
+		<property name="mappingLocations">
+			<list>
+				<value>classpath:jbpm.execution.hbm.xml</value>
+				<value>classpath:jbpm.history.hbm.xml</value>
+				<value>classpath:jbpm.identity.hbm.xml</value>
+				<value>classpath:jbpm.repository.hbm.xml</value>
+				<value>classpath:jbpm.task.hbm.xml</value>
+		    </list>
+		</property>
+		
+	</bean>
+
+	<bean id="txManager"
+		class="org.springframework.orm.hibernate3.HibernateTransactionManager">
+		<property name="sessionFactory" ref="sessionFactory" />
+		<property name="nestedTransactionAllowed" value="true" />
+	</bean>
+
+	<tx:annotation-driven transaction-manager="txManager" />
+
+	<!--  
+	<bean id="ehcacheManager"
+		class="org.springframework.cache.ehcache.EhCacheManagerFactoryBean">
+		<property name="configLocation" value="/WEB-INF/classes/ehcache.xml" />
+	</bean>
+	-->
+</beans>
