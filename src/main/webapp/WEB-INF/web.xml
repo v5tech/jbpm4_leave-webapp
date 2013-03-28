@@ -7,12 +7,9 @@
 	
 	<context-param>
 		<param-name>contextConfigLocation</param-name>
-		<param-value>
-			classpath*:META-INF/applicationContext*.xml
-			/WEB-INF/classes/applicationContext*.xml
-		</param-value>
+		<param-value>classpath:applicationContext*.xml</param-value>
 	</context-param>
-
+	
 	<filter>
 		<filter-name>encodingFilter</filter-name>
 		<filter-class>org.springframework.web.filter.CharacterEncodingFilter</filter-class>
@@ -67,6 +64,6 @@
 	</listener>
 	
 	<welcome-file-list>
-		<welcome-file>index.html</welcome-file>
+		<welcome-file>index.jsp</welcome-file>
 	</welcome-file-list>
 </web-app>
